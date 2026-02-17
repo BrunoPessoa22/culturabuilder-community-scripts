@@ -80,13 +80,32 @@ fi
 echo "🚀 Iniciando OpenClaw daemon..."
 openclaw daemon start
 
+# Configurar sync automático com Supabase
+if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
+    echo "📡 Sync com Supabase ativo (a cada 30 min)..."
+    SYNC_ENABLED=true
+else
+    echo "⚠️ Supabase não configurado — dados salvos apenas localmente"
+    SYNC_ENABLED=false
+fi
+
 # Manter container rodando
 echo "✅ Bot rodando! Monitorando..."
+SYNC_COUNTER=0
 while true; do
     # Verificar se OpenClaw está rodando
     if ! openclaw status &>/dev/null; then
-        echo "⚠️ OpenClaw caiu, reiniciando..."
+        echo "[$(date)] ⚠️ OpenClaw caiu, reiniciando..."
         openclaw daemon start
     fi
+    
+    # Sync com Supabase a cada 30 minutos (30 ciclos de 60s)
+    SYNC_COUNTER=$((SYNC_COUNTER + 1))
+    if [ "$SYNC_ENABLED" = true ] && [ $SYNC_COUNTER -ge 30 ]; then
+        echo "[$(date)] 🔄 Sync com Supabase..."
+        /home/botuser/scripts/sync-to-supabase.sh 2>/dev/null || echo "[$(date)] ⚠️ Sync falhou"
+        SYNC_COUNTER=0
+    fi
+    
     sleep 60
 done

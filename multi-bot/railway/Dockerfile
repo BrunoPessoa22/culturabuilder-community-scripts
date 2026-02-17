@@ -19,9 +19,14 @@ RUN useradd -m -s /bin/bash botuser
 # Instalar OpenClaw globalmente
 RUN npm install -g openclaw
 
+# Instalar Python (para sync scripts)
+RUN apt-get update && apt-get install -y python3 && rm -rf /var/lib/apt/lists/*
+
 # Copiar scripts
 COPY start.sh /home/botuser/start.sh
-RUN chmod +x /home/botuser/start.sh
+COPY ../scripts/sync-to-supabase.sh /home/botuser/scripts/sync-to-supabase.sh
+COPY ../scripts/restore-from-supabase.sh /home/botuser/scripts/restore-from-supabase.sh
+RUN chmod +x /home/botuser/start.sh /home/botuser/scripts/*.sh
 
 # Mudar para usuário não-root
 USER botuser
