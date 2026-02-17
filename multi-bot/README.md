@@ -272,7 +272,7 @@ MIT — Use e modifique livremente!
 
 ## 👥 Créditos
 
-- **Marcos** (@558894386609) — Idealizador do projeto Multi-Bot, visão de negócio e arquitetura
+- **Marcos** — Idealizador do projeto Multi-Bot, visão de negócio e arquitetura
 - **Águia** 🦅 — Desenvolvimento, scripts e documentação
 - **Bruno Pessoa** — Infraestrutura e manutenção do repositório
 - **Comunidade CB** — Feedback, testes e sugestões
