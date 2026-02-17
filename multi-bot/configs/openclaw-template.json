@@ -1,0 +1,52 @@
+{
+  "$schema": "openclaw-config",
+  "_comment": "Template de configuração — substitua os valores entre {{ }}",
+  
+  "agent": {
+    "name": "{{BOT_NAME}}",
+    "model": "{{LLM_MODEL}}",
+    "provider": "{{LLM_PROVIDER}}"
+  },
+  
+  "providers": {
+    "deepseek": {
+      "apiKey": "{{DEEPSEEK_API_KEY}}",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat"
+    },
+    "glm": {
+      "apiKey": "{{GLM_API_KEY}}",
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4"
+    },
+    "ollama": {
+      "baseUrl": "http://localhost:11434/v1",
+      "model": "llama3.1:8b"
+    }
+  },
+  
+  "gateway": {
+    "port": 18789,
+    "host": "0.0.0.0"
+  },
+  
+  "security": {
+    "autoApprove": {
+      "read": true,
+      "write": true,
+      "execute": false
+    }
+  },
+  
+  "channels": {
+    "whatsapp": {
+      "enabled": false,
+      "phoneId": "{{WHATSAPP_PHONE_ID}}",
+      "token": "{{WHATSAPP_TOKEN}}"
+    },
+    "telegram": {
+      "enabled": false,
+      "botToken": "{{TELEGRAM_BOT_TOKEN}}"
+    }
+  }
+}

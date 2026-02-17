@@ -1,0 +1,21 @@
+# Secrets
+.env
+*.env
+!configs/*.env
+
+# Bots locais (contém .env)
+bots/
+
+# Backups
+backups/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

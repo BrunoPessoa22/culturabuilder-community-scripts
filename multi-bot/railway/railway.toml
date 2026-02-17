@@ -1,0 +1,12 @@
+[build]
+dockerfilePath = "railway/Dockerfile"
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+
+# Volume persistente para memórias e sessões
+# Configurar via dashboard: Settings → Volumes
+# Mount path: /home/botuser/.openclaw
